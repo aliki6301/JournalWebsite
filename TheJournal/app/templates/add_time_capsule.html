@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 class="text-center" style="font-family: 'Courier New', Courier, monospace; color: #8B4513;">Add Time Capsule</h2>
+    <form method="POST" enctype="multipart/form-data" class="mx-auto" style="max-width: 600px; background-color: #F5F5DC; padding: 20px; border: 1px solid #8B4513; border-radius: 10px;">
+        <div class="mb-3">
+            <label for="title" class="form-label" style="font-family: 'Courier New', Courier, monospace; color: #8B4513;">Title</label>
+            <input type="text" class="form-control" id="title" name="title" required style="background-color: #FFF8DC; border: 1px solid #8B4513;">
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label" style="font-family: 'Courier New', Courier, monospace; color: #8B4513;">Content</label>
+            <textarea class="form-control" id="content" name="content" rows="5" required style="background-color: #FFF8DC; border: 1px solid #8B4513;"></textarea>
+        </div>
+            <!-- Mood Input Section -->
+            <div class="mb-3">
+                <label for="mood" class="form-label" style="font-family: 'Courier New', Courier, monospace; color: #8B4513;">Mood</label>
+                <select class="form-control" id="mood" name="mood" required style="background-color: #FFF8DC; border: 1px solid #8B4513;">
+                    <option value="happy">Happy 😄</option>
+                    <option value="sad">Sad 😞</option>
+                    <option value="excited">Excited 🚀</option>
+                    <option value="angry">Angry 😡</option>
+                    <option value="calm">Calm 🌼</option>
+                    <option value="anxious">Anxious 😬</option>
+                </select>
+            </div>
+        <div class="mb-3">
+            <label for="unlock_date" class="form-label" style="font-family: 'Courier New', Courier, monospace; color: #8B4513;">Unlock Date</label>
+            <input type="date" class="form-control" id="unlock_date" name="unlock_date" required style="background-color: #FFF8DC; border: 1px solid #8B4513;">
+        </div>
+        <div class="mb-3">
+            <label for="video" class="form-label" style="font-family: 'Courier New', Courier, monospace; color: #8B4513;">Upload Video (optional)</label>
+            <input type="file" class="form-control" id="video" name="video" style="background-color: #FFF8DC; border: 1px solid #8B4513;">
+        </div>
+        <div class="mb-3">
+            <label for="audio" class="form-label" style="font-family: 'Courier New', Courier, monospace; color: #8B4513;">Upload Audio (optional)</label>
+            <input type="file" class="form-control" id="audio" name="audio" style="background-color: #FFF8DC; border: 1px solid #8B4513;">
+        </div>
+        <button type="submit" class="btn btn-primary" style="background-color: #8B4513; border: none; font-family: 'Courier New', Courier, monospace;">Add Time Capsule</button>
+    </form>
+{% endblock %}

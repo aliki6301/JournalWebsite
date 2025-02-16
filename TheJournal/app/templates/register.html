@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2 class="text-center" style="font-family: 'Courier New', Courier, monospace; color: #8B4513;">Register</h2>
+    <form method="POST" class="mx-auto" style="max-width: 400px; background-color: #F5DEB3; padding: 20px; border: 2px solid #8B4513; border-radius: 10px;">
+        <div class="mb-3">
+            <label for="username" class="form-label" style="font-family: 'Courier New', Courier, monospace; color: #8B4513;">Username</label>
+            <input type="text" class="form-control" id="username" name="username" required style="background-color: #FFF8DC; border: 1px solid #8B4513;">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label" style="font-family: 'Courier New', Courier, monospace; color: #8B4513;">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required style="background-color: #FFF8DC; border: 1px solid #8B4513;">
+        </div>
+        <button type="submit" class="btn btn-primary" style="background-color: #8B4513; border: none; font-family: 'Courier New', Courier, monospace;">Register</button>
+    </form>
+{% endblock %}

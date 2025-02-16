@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f4f1ea;
+            color: #5d4037;
+        }
+        h2 {
+            font-family: 'Georgia', serif;
+            color: #3e2723;
+        }
+        p {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1.2em;
+        }
+        video, audio {
+            border: 2px solid #3e2723;
+            border-radius: 5px;
+            background-color: #f4f1ea;
+        }
+        .text-muted {
+            font-style: italic;
+        }
+        .btn-secondary {
+            background-color: #8d6e63;
+            border-color: #8d6e63;
+        }
+        .btn-secondary:hover {
+            background-color: #6d4c41;
+            border-color: #6d4c41;
+        }
+    </style>
+
+    <h2>{{ capsule.title }}</h2>
+    <p>{{ capsule.content }}</p>
+    <!-- view mood if it is there -->
+    {% if capsule.mood %}
+        <p>Mood: {{ capsule.mood }}</p>
+    {% endif %}
+    {% if capsule.video_path %}
+        <video width="100%" controls>
+            <source src="{{ url_for('static', filename=capsule.video_path) }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    {% endif %}
+    {% if capsule.audio_path %}
+        <audio controls>
+            <source src="{{ url_for('static', filename=capsule.audio_path) }}" type="audio/mpeg">
+            Your browser does not support the audio tag.
+        </audio>
+    {% endif %}
+    <small class="text-muted">Unlocked on: {{ capsule.unlock_date.strftime('%Y-%m-%d') }}</small>
+    <a href="{{ url_for('main_routes.dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+{% endblock %}

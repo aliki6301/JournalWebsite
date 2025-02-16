@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+
+        body {
+            background-color: #f4f1ea;
+            font-family: 'Courier New', Courier, monospace;
+            color: #5d4037;
+        }
+        .vintage-header {
+            font-family: 'Georgia', serif;
+            color: #8b4513;
+        }
+        .btn-vintage {
+            background-color: #d2b48c;
+            border: 1px solid #8b4513;
+            color: #fff;
+            transition: transform 0.3s ease-in-out;
+        }
+        .btn-vintage:hover {
+            transform: scale(1.1);
+        }
+        .list-group-item {
+            background-color: #fff8dc;
+            border: 1px solid #8b4513;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .list-group-item:hover {
+            background-color: #f5deb3;
+        }
+        .text-muted {
+            color: #8b4513 !important;
+        }
+        .journal-entries, .time-capsules {
+            margin-top: 20px;
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+
+    <h2 class="text-center vintage-header fade-in">Dashboard</h2>
+    <div class="text-center mb-4 fade-in">
+        <a href="{{ url_for('main_routes.add_entry') }}" class="btn btn-success btn-vintage">
+            <i class="fas fa-plus"></i> Add Journal Entry
+        </a>
+        <a href="{{ url_for('main_routes.add_time_capsule') }}" class="btn btn-warning btn-vintage">
+            <i class="fas fa-clock"></i> Add Time Capsule
+        </a>
+    </div>
+
+    <div class="journal-entries fade-in">
+        <h3 class="vintage-header">Journal Entries</h3>
+        <ul class="list-group">
+            {% for entry in journal_entries %}
+                <li class="list-group-item">
+                    <a href="{{ url_for('main_routes.view_entry', entry_id=entry.id) }}">
+                        <i class="fas fa-book"></i> {{ entry.title }}
+                    </a>
+                    <small class="text-muted">{{ entry.timestamp.strftime('%Y-%m-%d %H:%M') }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="time-capsules fade-in">
+        <h3 class="mt-4 vintage-header">Time Capsules</h3>
+        <ul class="list-group">
+            {% for capsule in time_capsules %}
+                <li class="list-group-item">
+                    <a href="{{ url_for('main_routes.view_time_capsule', capsule_id=capsule.id) }}">
+                        <i class="fas fa-box"></i> {{ capsule.title }}
+                    </a>
+                    <small class="text-muted">Unlocks on: {{ capsule.unlock_date.strftime('%Y-%m-%d') }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

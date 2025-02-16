@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        body {
+            background-color: #f4f1ea;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .vintage-form {
+            background-color: #fff8dc;
+            border: 2px solid #d2b48c;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .vintage-form .form-label {
+            font-weight: bold;
+            color: #8b4513;
+        }
+        .vintage-form .form-control {
+            background-color: #fffaf0;
+            border: 1px solid #d2b48c;
+            color: #8b4513;
+        }
+        .vintage-form .btn-primary {
+            background-color: #8b4513;
+            border-color: #8b4513;
+        }
+        .vintage-form .btn-primary:hover {
+            background-color: #a0522d;
+            border-color: #a0522d;
+        }
+    </style>
+
+    <h2 class="text-center">Login</h2>
+    <form method="POST" class="vintage-form mx-auto" style="max-width: 400px;">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+{% endblock %}

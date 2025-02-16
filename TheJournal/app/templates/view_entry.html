@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <style>
+        body { 
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f4f1ea;
+            color: #5d4037;
+        }
+        body.modal-open {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            font-family: 'Georgia', serif;
+            color: #3e2723;
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        p {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 18px;
+            line-height: 1.6;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+        video, audio {
+            border: 2px solid #3e2723;
+            border-radius: 5px;
+            background-color: #e0e0e0;
+        }
+        .text-muted {
+            font-style: italic;
+            display: block;
+            text-align: right;
+            margin-top: 20px;
+        }
+        .btn-secondary {
+            background-color: #8d6e63;
+            border-color: #8d6e63;
+        }
+        .btn-secondary:hover {
+            background-color: #6d4c41;
+            border-color: #6d4c41;
+        }
+        .crt-tv {
+            position: relative;
+            width: 100%;
+            max-width: 640px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #333;
+            border: 10px solid #222;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        .crt-tv:before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 5px solid #555;
+            border-radius: 10px;
+            pointer-events: none;
+        }
+        .crt-tv video {
+            display: block;
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+        @keyframes vintage-flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        .vintage-icon {
+            animation: vintage-flicker 1s infinite;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 640px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+
+    <h2>{{ entry.title }}</h2>
+    <!-- view mood -->
+    {% if entry.mood %}
+        <p>Mood: {{ entry.mood }}</p>
+    {% endif %}
+    <p>{{ entry.content }}</p>
+
+    {% if entry.video_path %}
+        <button id="videoBtn" class="btn btn-secondary">Watch Video</button>
+        <div id="videoModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div class="crt-tv">
+                    <video controls>
+                        <source src="{{ url_for('static', filename=entry.video_path) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if entry.audio_path %}
+        <audio controls>
+            <source src="{{ url_for('static', filename=entry.audio_path) }}" type="audio/mpeg">
+            Your browser does not support the audio tag.
+        </audio>
+    {% endif %}
+    <small class="text-muted">{{ entry.timestamp.strftime('%Y-%m-%d %H:%M') }}</small>
+    <a href="{{ url_for('main_routes.dashboard') }}" class="btn btn-secondary mt-3">
+        <i class="fas fa-arrow-left vintage-icon"></i> Back to Dashboard
+    </a>
+
+    <!-- Add Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <script>
+        var modal = document.getElementById("videoModal");
+        var btn = document.getElementById("videoBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            modal.style.display = "block";
+            document.body.classList.add("modal-open");
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+            document.body.classList.remove("modal-open");
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                document.body.classList.remove("modal-open");
+            }
+        }
+    </script>
+{% endblock %}
